@@ -28,9 +28,19 @@ public class ChatListener implements Listener {
         boolean charSpam = checkCharSpam(message, config, e.getPlayer());
         if (!charSpam) interchangeableCaps = checkInterCaps(e.getMessage().toCharArray(), e.getPlayer(), config);
         if (!charSpam && !interchangeableCaps) capsEveryWord = checkCapsEveryWord(e.getMessage().split(" "), e.getPlayer(), config);
+        boolean advertising = checkAdvertisement(e.getMessage(), e.getPlayer());
 
 
-        if (charSpam || capsEveryWord || interchangeableCaps) e.setCancelled(true);
+        if (charSpam || capsEveryWord || interchangeableCaps || advertising) e.setCancelled(true);
+    }
+
+    private boolean checkAdvertisement(String message, Player player) {
+        message = message.toLowerCase();
+        if (message.contains("com") || message.contains("net") || message.contains("org")) {
+            player.sendMessage(Lang.SPAMFILTER_TITLE + ChatColor.RED + "Please do not post links in chat.");
+            return true;
+        }
+        return false;
     }
 
     private boolean checkInterCaps(char[] message, Player player, FileConfiguration config) {
