@@ -1,6 +1,6 @@
 package com.haleykell.spamfilter;
 
-import com.haleykell.spamfilter.commands.ChangeSpamLimitCommand;
+import com.haleykell.spamfilter.commands.ChangeSpamFilterCommand;
 import com.haleykell.spamfilter.listeners.ChatListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,7 +14,7 @@ public class Core extends JavaPlugin {
             saveDefaultConfig();
         }
 
-        getCommand("spamfilter").setExecutor(new ChangeSpamLimitCommand(this));
+        getCommand("spamfilter").setExecutor(new ChangeSpamFilterCommand(this));
 
         getServer().getPluginManager().registerEvents(new ChatListener(this), this);
 
