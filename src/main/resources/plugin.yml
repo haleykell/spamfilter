@@ -1,0 +1,8 @@
+name: 'SpamFilter'
+version: '1.0-SNAPSHOT'
+description: 'Spam Filter for Minecraft Servers'
+main: 'com.haleykell.spamfilter.Core'
+api-version: '1.15'
+commands:
+  spamfilter:
+    description: Change the spam filter limit
