@@ -20,8 +20,8 @@ public class ChangeSpamFilterCommand implements CommandExecutor {
         if (strings.length == 0) {
             commandSender.sendMessage(Lang.SPAMFILTER_TITLE + "Current spam limits are");
             commandSender.sendMessage(Lang.SPAMFILTER_TITLE + "Character Spam: " + config.getInt("limit"));
-            commandSender.sendMessage(Lang.SPAMFILTER_TITLE + "Capitalized Words: " + config.getInt("capsWords"));
-            commandSender.sendMessage(Lang.SPAMFILTER_TITLE + "Capitalized Letters: " + config.getInt("caps"));
+            commandSender.sendMessage(Lang.SPAMFILTER_TITLE + "Capitalized Words: " + config.getDouble("capsWords"));
+            commandSender.sendMessage(Lang.SPAMFILTER_TITLE + "Capitalized Letters: " + config.getDouble("caps"));
             return true;
         }
         else if (strings.length > 2 || strings.length == 1) {

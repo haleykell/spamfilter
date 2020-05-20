@@ -23,9 +23,12 @@ public class ChatListener implements Listener {
 
         int count = 1;
         char[] message = e.getMessage().toCharArray();
+        boolean capsEveryWord = false;
+        boolean interchangeableCaps = false;
         boolean charSpam = checkCharSpam(message, config, e.getPlayer());
-        boolean capsEveryWord = checkCapsEveryWord(e.getMessage().split(" "), e.getPlayer(), config);
-        boolean interchangeableCaps = checkInterCaps(e.getMessage().toCharArray(), e.getPlayer(), config);
+        if (!charSpam) interchangeableCaps = checkInterCaps(e.getMessage().toCharArray(), e.getPlayer(), config);
+        if (!charSpam && !interchangeableCaps) capsEveryWord = checkCapsEveryWord(e.getMessage().split(" "), e.getPlayer(), config);
+
 
         if (charSpam || capsEveryWord || interchangeableCaps) e.setCancelled(true);
     }
@@ -35,7 +38,7 @@ public class ChatListener implements Listener {
         for (char c : message) {
             if (Character.isUpperCase(c)) count++;
         }
-        if (count >= ((double) message.length) * config.getDouble("caps", 0.75)) {
+        if (count >= ((double) message.length) * config.getDouble("caps", 0.50)) {
             player.sendMessage(Lang.SPAMFILTER_TITLE + ChatColor.RED + "Somewhere, a mod is crying. Please do not capitalize so many letters!");
             return true;
         }
@@ -47,7 +50,7 @@ public class ChatListener implements Listener {
         for (String str : s) {
             if (Character.isUpperCase(str.charAt(0))) count++;
         }
-        if (count >= ((double) s.length) * config.getDouble("capsWords", 0.9)) {
+        if (count >= ((double) s.length) * config.getDouble("capsWords", 0.90)) {
             player.sendMessage(Lang.SPAMFILTER_TITLE + ChatColor.RED + "Somewhere, a mod is crying. Please do not capitalize the first letter of every word!");
             return true;
         }
